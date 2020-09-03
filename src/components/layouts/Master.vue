@@ -9,6 +9,7 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item @click="routePage(1)">Jsongen</b-nav-item>
+          <b-nav-item @click="routePage(2)">Datadic</b-nav-item>
           <!-- <b-nav-item @click="routePage(2)">Map</b-nav-item>
           <b-nav-item @click="routePage(3)">Health</b-nav-item>
           <b-nav-item @click="routePage(5)">Sources</b-nav-item>
@@ -16,9 +17,9 @@
         </b-navbar-nav>
 
       <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
+        <!-- <b-navbar-nav class="ml-auto">
           <b-nav-item><b-button @click="BuyCoffe()" variant="danger">☕ Buy me a Coffee</b-button></b-nav-item>
-        </b-navbar-nav>
+        </b-navbar-nav> -->
       </b-collapse>
     </b-navbar>
   </div>
@@ -36,6 +37,9 @@ export default {
         switch(val) {
           case 1:
             if (this.$route.path !== '/Jsongen/share') this.$router.push('/Jsongen/share')
+            break;
+          case 2:
+            if (this.$route.path !== '/Datadic/share') this.$router.push('/Datadic/share')
             break;
           case 6:
             if (this.$route.path !== '/Donate/share') this.$router.push('/Donate/share')
