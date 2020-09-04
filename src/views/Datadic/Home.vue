@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1>DATA DIC</h1>
+      <h1 style="color:#fff;">DATA DIC</h1>
   </div>
 </template>
 

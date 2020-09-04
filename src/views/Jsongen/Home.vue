@@ -83,17 +83,32 @@ export default {
     },
     methods: {
         process () {
-            let x = {
-                rs_body: {
-                    field_name: this.fieldName
-                }
+            let field_name = this.fieldName.split('\n')
+            let value_field = this.valueField.split('\n')
+
+            // compare index two Arrays
+            let is_index = field_name.length == value_field.length
+            if (is_index == false) {
+                console.log('field and value not match')
             }
 
-            let strObj = JSON.stringify(x, undefined, 4);
+            // console.log('field_name', field_name)
+            // console.log('value_field', value_field)
+
+            let obj = { rs_body: {} }
+            field_name.forEach((key, i) => {
+                obj.rs_body[key] = value_field[i]
+            })
+
+            // console.log('obj', obj)
+
+            let strObj = JSON.stringify(obj, undefined, 4)
 
             this.result = strObj
         },
-        copyResult () {}
+        copyResult () {
+
+        }
     }
 }
 </script>
