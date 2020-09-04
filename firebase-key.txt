@@ -1,0 +1,8 @@
+apiKey: "AIzaSyDqlIUjVAVC4NbcDUszljiF2bJuzoNzEE0",
+authDomain: "code-gen-28284.firebaseapp.com",
+databaseURL: "https://code-gen-28284.firebaseio.com",
+projectId: "code-gen-28284",
+storageBucket: "code-gen-28284.appspot.com",
+messagingSenderId: "1088998815463",
+appId: "1:1088998815463:web:c007203a7d11fc37eed442",
+measurementId: "G-040N822W4E"
