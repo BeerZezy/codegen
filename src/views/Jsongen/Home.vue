@@ -77,8 +77,7 @@ export default {
         return {
             fieldName: '',
             valueField: '',
-            result: '',
-            j: {}
+            result: ''
         }
     },
     methods: {
@@ -107,7 +106,13 @@ export default {
             this.result = strObj
         },
         copyResult () {
-
+            this.$copyText(this.result).then((e) => {
+                alert('Copied')
+                // console.log(e)
+            }, (e) => {
+            alert('Can not copy')
+                console.log(e)
+            })
         }
     }
 }
