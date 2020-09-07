@@ -62,7 +62,7 @@
                     </b-card-group>
                 </b-col>
             </b-row>
-            <b-row style="color:#fff;padding-top:5px;padding-bottom:20px;">
+            <b-row v-if="result != ''" style="color:#fff;padding-top:5px;padding-bottom:20px;">
                 <b-col sm="12" style="text-align:right;">
                     <b-button @click="copyResult()" style="background-color:#3498db;">Copy</b-button>
                 </b-col>
@@ -72,6 +72,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+
 export default {
     data () {
         return {
@@ -82,24 +84,50 @@ export default {
     },
     methods: {
         process () {
+            // check empty
+            if (this.fieldName == '' || this.valueField == '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Field or value is empty!'
+                })
+                return
+            }
+
             let field_name = this.fieldName.split('\n')
             let value_field = this.valueField.split('\n')
+
+            // filter value not empty
+            if (field_name.length > 0 && value_field.length > 0) {
+                field_name = field_name.filter((el) => { return el != '' })
+                value_field = value_field.filter((el) => { return el != '' })
+            }
+            
+            // console.log('field_name', field_name)
+            // console.log('value_field', value_field)
 
             // compare index two Arrays
             let is_index = field_name.length == value_field.length
             if (is_index == false) {
-                console.log('field and value not match')
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Field and value not match!'
+                })
+                return
             }
 
-            // console.log('field_name', field_name)
-            // console.log('value_field', value_field)
+            // remove all whitespace in field_name
+            field_name = field_name.map((el) => {
+                return el.replace(/ /g,'')
+                // return e.trim()
+            })
 
+            // prepare json data
             let obj = { rs_body: {} }
             field_name.forEach((key, i) => {
                 obj.rs_body[key] = value_field[i]
             })
-
-            // console.log('obj', obj)
 
             let strObj = JSON.stringify(obj, undefined, 4)
 
@@ -107,10 +135,15 @@ export default {
         },
         copyResult () {
             this.$copyText(this.result).then((e) => {
-                alert('Copied')
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Copied',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
                 // console.log(e)
             }, (e) => {
-            alert('Can not copy')
+                alert('Can not copy')
                 console.log(e)
             })
         }
