@@ -119,7 +119,7 @@ export default {
 
             // remove all whitespace in field_name
             field_name = field_name.map((el) => {
-                return el.replace(/ /g,'')
+                return el.replace(/ /g, '')
                 // return e.trim()
             })
 
