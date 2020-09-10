@@ -11,20 +11,22 @@
                     <h5 style="color:#d8dce6;font-size:16px;">Field</h5>
                     <b-card-group deck>
                         <b-card text-variant="white" style="background:#313c5f;">
-                            <!-- <div>
-                                <p>1</p>
-                                <p>2</p>
-                                <p>3</p>
-                                <p>4</p>
-                            </div> -->
-
-                            <b-form-textarea
-                                style="color:#fff;background-color:#313c5f;border:none;"
-                                id="textarea-no-resize"
-                                rows="12"
-                                no-resize
-                                v-model="fieldName"
-                            ></b-form-textarea>
+                            <b-row>
+                                <div class="line-number">
+                                    <ul>
+                                        <li v-for="(linenumber, index) in lineCountFieldName" :key="index">{{linenumber}}</li>
+                                    </ul>
+                                </div>
+                                <b-col sm="11">
+                                    <b-form-textarea
+                                        style="color:#fff;background-color:#313c5f;border:none;"
+                                        id="textarea-no-resize"
+                                        rows="12"
+                                        no-resize
+                                        v-model="fieldName"
+                                    ></b-form-textarea>
+                                </b-col>
+                            </b-row>
                         </b-card>
                     </b-card-group>
                 </b-col>
@@ -32,13 +34,22 @@
                     <h5 style="color:#d8dce6;font-size:16px;">Value</h5>
                     <b-card-group deck>
                         <b-card text-variant="white" style="background:#313c5f;">
-                            <b-form-textarea
-                                style="color:#fff;background-color:#313c5f;border:none;"
-                                id="textarea-no-resize"
-                                rows="12"
-                                no-resize
-                                v-model="valueField"
-                            ></b-form-textarea>
+                            <b-row>
+                                <div class="line-number">
+                                    <ul>
+                                        <li v-for="(linenumber, index) in lineCountValueField" :key="index">{{linenumber}}</li>
+                                    </ul>
+                                </div>
+                                <b-col sm="11">
+                                    <b-form-textarea
+                                        style="color:#fff;background-color:#313c5f;border:none;"
+                                        id="textarea-no-resize"
+                                        rows="12"
+                                        no-resize
+                                        v-model="valueField"
+                                    ></b-form-textarea>
+                                </b-col>
+                            </b-row>
                         </b-card>
                     </b-card-group>
                 </b-col>
@@ -57,14 +68,23 @@
                 <b-col sm="12">
                     <b-card-group deck>
                         <b-card text-variant="white" style="background:#313c5f;">
-                            <b-form-textarea
-                                style="color:#fff;background-color:#313c5f;border:none;"
-                                id="textarea-no-resize"
-                                disabled
-                                rows="8"
-                                no-resize
-                                v-model="result"
-                            ></b-form-textarea>
+                            <b-row>
+                                <div class="line-number">
+                                    <ul>
+                                        <li v-for="(linenumber, index) in lineCountResult" :key="index">{{linenumber}}</li>
+                                    </ul>
+                                </div>
+                                <b-col sm="11">
+                                    <b-form-textarea
+                                        style="color:#fff;background-color:#313c5f;border:none;"
+                                        id="textarea-no-resize"
+                                        disabled
+                                        rows="8"
+                                        no-resize
+                                        v-model="result"
+                                    ></b-form-textarea>
+                                </b-col>
+                            </b-row>
                         </b-card>
                     </b-card-group>
                 </b-col>
@@ -87,6 +107,18 @@ export default {
             fieldName: '',
             valueField: '',
             result: ''
+        }
+    },
+    computed: {
+        lineCountFieldName () {
+            // Return number of lines using regex if not empty
+            return this.fieldName.length ? this.fieldName.split(/\r\n|\r|\n/).length : 0
+        },
+        lineCountValueField () {
+            return this.valueField.length ? this.valueField.split(/\r\n|\r|\n/).length : 0
+        },
+        lineCountResult() {
+            return this.result.length ? this.result.split(/\r\n|\r|\n/).length : 0
         }
     },
     methods: {
@@ -159,4 +191,15 @@ export default {
 </script>
 
 <style>
+    .line-number {
+        border-right: 1px solid red;
+    }
+    .line-number ul {
+        padding: 6px 12px;
+        font-size: 1rem;
+        list-style-type: none;
+    }
+    .line-number ul li {
+        color:#ffffff80;
+    }
 </style>
